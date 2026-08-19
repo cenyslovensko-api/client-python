@@ -18,10 +18,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v2
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+
+      - name: Build bundled RPC binary
+        run: |
+          cmake -S . -B build
+          cmake --build build --target core_rpc_server
 
       - name: Install build tools
         run: pip install build
