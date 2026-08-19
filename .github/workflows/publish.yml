@@ -50,8 +50,3 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        # Uses OIDC trusted publishing — configure the publisher on PyPI:
-        # https://docs.pypi.org/trusted-publishers/
-        # Alternatively, set a PYPI_API_TOKEN secret and use:
-        # with:
-        #   password: ${{ secrets.PYPI_API_TOKEN }}
