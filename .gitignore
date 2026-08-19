@@ -5,6 +5,7 @@ CMakeFiles/
 
 # Vendored binaries (built locally via cmake --build build)
 vendor/
+cenyslovensko_client/vendor/
 
 # Python build / packaging
 __pycache__/

@@ -17,11 +17,20 @@ def resolve_rpc_server_command(command: Sequence[str] | None) -> list[str]:
     if explicit_binary:
         return [explicit_binary]
 
-    repo_root = Path(__file__).resolve().parents[2]
+    package_root = Path(__file__).resolve().parents[1]
     extension = ".exe" if os.name == "nt" else ""
-    bundled_binary = repo_root / "vendor" / f"{RPC_SERVER_BIN_NAME}{extension}"
-    if bundled_binary.exists():
-        return [str(bundled_binary)]
+    packaged_binary = package_root / "vendor" / f"{RPC_SERVER_BIN_NAME}{extension}"
+    if packaged_binary.exists():
+        return [str(packaged_binary)]
+
+    legacy_packaged_binary = package_root / "bin" / f"{RPC_SERVER_BIN_NAME}{extension}"
+    if legacy_packaged_binary.exists():
+        return [str(legacy_packaged_binary)]
+
+    repo_root = package_root.parent
+    vendored_binary = repo_root / "vendor" / f"{RPC_SERVER_BIN_NAME}{extension}"
+    if vendored_binary.exists():
+        return [str(vendored_binary)]
 
     if shutil.which(RPC_SERVER_BIN_NAME):
         return [RPC_SERVER_BIN_NAME]
@@ -29,5 +38,5 @@ def resolve_rpc_server_command(command: Sequence[str] | None) -> list[str]:
     raise RpcClientError(
         "RPC server binary not found. Set command=..., set "
         f"{RPC_SERVER_BIN_ENV}, install '{RPC_SERVER_BIN_NAME}' in PATH, "
-        "or place the binary in vendor/ at the repository root."
+        "or ship it in cenyslovensko_client/vendor/ (wheel) or vendor/ (repository)."
     )

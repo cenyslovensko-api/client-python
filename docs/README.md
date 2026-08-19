@@ -19,7 +19,7 @@ cmake --build build
 
 This will:
 1. Clone `cenyslovensko-api/core` and compile the RPC server binary with cargo
-2. Install the binary to `../vendor`
+2. Install the binary to `cenyslovensko_client/vendor/`
 3. Run `pip install -e ".[test]"` for the Python package
 
 To pin a specific release tag instead of `main`:
@@ -55,8 +55,9 @@ with CenyslovenskoProductRpcClient() as client:
 When no `command` is passed to a client, the binary is located in the following order:
 
 1. `CENYSLOVENSKO_RPC_SERVER_BIN` environment variable
-2. `../vendor/cenyslovensko_rpc_server` (installed by CMake)
-3. `cenyslovensko_rpc_server` on `PATH`
+2. `cenyslovensko_client/vendor/cenyslovensko_rpc_server` (bundled in wheel)
+3. `../vendor/cenyslovensko_rpc_server` (repository fallback)
+4. `cenyslovensko_rpc_server` on `PATH`
 
 ```bash
 # override at runtime
@@ -78,7 +79,7 @@ cmake --build build --target test
 | `CORE_REPO`      | `https://github.com/cenyslovensko-api/core.git` | Git URL of the core repo               |
 | `CORE_TAG`       | `main`                                           | Git tag, branch, or commit to build    |
 | `BIN_NAME`       | `cenyslovensko_rpc_server`                       | Cargo package / binary name            |
-| `BIN_OUTPUT_DIR` | `../vendor`                                       | Where the binary is installed          |
+| `BIN_OUTPUT_DIR` | `cenyslovensko_client/vendor`                     | Where the binary is installed          |
 
 ## CI / CD
 

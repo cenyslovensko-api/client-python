@@ -24,6 +24,16 @@ class CommandResolverTests(unittest.TestCase):
             command = resolve_rpc_server_command(None)
         self.assertEqual(command, ["/opt/cenyslovensko_rpc_server"])
 
+    def test_prefers_packaged_binary_when_present(self) -> None:
+        extension = ".exe" if os.name == "nt" else ""
+        expected_suffix = f"cenyslovensko_client/vendor/cenyslovensko_rpc_server{extension}"
+        with patch.dict(os.environ, {}, clear=True):
+            with patch(
+                "cenyslovensko_client.adapters.command_resolver.Path.exists", return_value=True
+            ):
+                command = resolve_rpc_server_command(None)
+        self.assertTrue(command[0].endswith(expected_suffix))
+
     def test_returns_path_binary_when_available(self) -> None:
         with patch.dict(os.environ, {}, clear=True):
             with patch(
