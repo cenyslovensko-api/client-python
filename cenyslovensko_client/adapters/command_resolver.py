@@ -23,10 +23,6 @@ def resolve_rpc_server_command(command: Sequence[str] | None) -> list[str]:
     if packaged_binary.exists():
         return [str(packaged_binary)]
 
-    legacy_packaged_binary = package_root / "bin" / f"{RPC_SERVER_BIN_NAME}{extension}"
-    if legacy_packaged_binary.exists():
-        return [str(legacy_packaged_binary)]
-
     repo_root = package_root.parent
     vendored_binary = repo_root / "vendor" / f"{RPC_SERVER_BIN_NAME}{extension}"
     if vendored_binary.exists():

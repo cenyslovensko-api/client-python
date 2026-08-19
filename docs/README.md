@@ -86,6 +86,6 @@ cmake --build build --target test
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | **Test** | push / PR to `main` | Runs `cmake -S . -B build && cmake --build build && cmake --build build --target test` on Ubuntu and macOS |
-| **Publish** | GitHub release published | Builds sdist + wheel, publishes to PyPI via OIDC trusted publishing |
+| **Publish** | GitHub release published | Builds platform-specific wheels (Linux/macOS/Windows) + sdist, publishes to PyPI via OIDC trusted publishing |
 
 [Dependabot](https://docs.github.com/en/code-security/dependabot) is configured to open weekly PRs for GitHub Actions and Python dependency updates.

@@ -1,2 +1,1 @@
 recursive-include cenyslovensko_client/vendor *
-recursive-include cenyslovensko_client/bin *

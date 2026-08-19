@@ -16,7 +16,7 @@ where = ["."]
 include = ["cenyslovensko_client*"]
 
 [tool.setuptools.package-data]
-cenyslovensko_client = ["vendor/*", "bin/*"]
+cenyslovensko_client = ["vendor/*"]
 
 [tool.setuptools_scm]
 version_scheme = "no-guess-dev"
