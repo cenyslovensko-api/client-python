@@ -10,6 +10,10 @@ class bdist_wheel(_bdist_wheel):
 
     def get_tag(self) -> tuple[str, str, str]:
         _, _, platform_tag = super().get_tag()
+        if platform_tag == "linux_x86_64":
+            platform_tag = "manylinux2014_x86_64"
+        elif platform_tag == "linux_aarch64":
+            platform_tag = "manylinux2014_aarch64"
         return "py3", "none", platform_tag
 
 
