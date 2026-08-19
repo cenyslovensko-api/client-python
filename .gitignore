@@ -1,0 +1,20 @@
+# CMake build directory (includes venv, cloned core source, and build artifacts)
+build/
+CMakeCache.txt
+CMakeFiles/
+
+# Python build / packaging
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
