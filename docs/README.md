@@ -38,7 +38,7 @@ cmake --build build --target core_rpc_server
 ## Usage
 
 ```python
-from cenyslovensko_bindings import CenyslovenskoVersionRpcClient, CenyslovenskoProductRpcClient
+from cenyslovensko_client import CenyslovenskoVersionRpcClient, CenyslovenskoProductRpcClient
 
 # version
 with CenyslovenskoVersionRpcClient() as client:

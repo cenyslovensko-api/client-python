@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(cenyslovensko_bindings NONE)
+project(cenyslovensko_client NONE)
 
 include(ExternalProject)
 
@@ -12,7 +12,7 @@ set(CORE_TAG "main"
 set(BIN_NAME "cenyslovensko_rpc_server"
     CACHE STRING "Name of the RPC server binary to build from core")
 
-set(BIN_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/cenyslovensko_bindings/bin"
+set(BIN_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/vendor"
     CACHE PATH "Directory where the compiled binary is installed")
 
 find_program(CARGO_EXECUTABLE cargo REQUIRED

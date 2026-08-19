@@ -3,6 +3,9 @@ build/
 CMakeCache.txt
 CMakeFiles/
 
+# Vendored binaries (built locally via cmake --build build)
+vendor/
+
 # Python build / packaging
 __pycache__/
 *.py[cod]

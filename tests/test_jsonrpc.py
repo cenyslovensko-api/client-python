@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from cenyslovensko_bindings.domain.jsonrpc import build_request, parse_response
-from cenyslovensko_bindings.errors import RpcClientError, RpcProtocolError
+from cenyslovensko_client.domain.jsonrpc import build_request, parse_response
+from cenyslovensko_client.errors import RpcClientError, RpcProtocolError
 
 
 class JsonRpcTests(unittest.TestCase):

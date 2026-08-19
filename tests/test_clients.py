@@ -8,9 +8,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from cenyslovensko_bindings.clients.product import CenyslovenskoProductRpcClient
-from cenyslovensko_bindings.clients.version import CenyslovenskoVersionRpcClient
-from cenyslovensko_bindings.errors import RpcClientError
+from cenyslovensko_client.clients.product import CenyslovenskoProductRpcClient
+from cenyslovensko_client.clients.version import CenyslovenskoVersionRpcClient
+from cenyslovensko_client.errors import RpcClientError
 
 
 class FakeSession:

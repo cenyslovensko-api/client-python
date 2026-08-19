@@ -17,9 +17,9 @@ def resolve_rpc_server_command(command: Sequence[str] | None) -> list[str]:
     if explicit_binary:
         return [explicit_binary]
 
-    package_root = Path(__file__).resolve().parents[1]
+    repo_root = Path(__file__).resolve().parents[2]
     extension = ".exe" if os.name == "nt" else ""
-    bundled_binary = package_root / "bin" / f"{RPC_SERVER_BIN_NAME}{extension}"
+    bundled_binary = repo_root / "vendor" / f"{RPC_SERVER_BIN_NAME}{extension}"
     if bundled_binary.exists():
         return [str(bundled_binary)]
 
@@ -29,5 +29,5 @@ def resolve_rpc_server_command(command: Sequence[str] | None) -> list[str]:
     raise RpcClientError(
         "RPC server binary not found. Set command=..., set "
         f"{RPC_SERVER_BIN_ENV}, install '{RPC_SERVER_BIN_NAME}' in PATH, "
-        "or ship the binary in cenyslovensko_bindings/bin/ for wheel builds."
+        "or place the binary in vendor/ at the repository root."
     )

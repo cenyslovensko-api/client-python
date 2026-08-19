@@ -16,4 +16,4 @@ where = ["."]
 include = ["cenyslovensko_client*"]
 
 [tool.setuptools.package-data]
-cenyslovensko_client = ["bin/*"]
+cenyslovensko_client = []

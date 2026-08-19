@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from cenyslovensko_bindings import (
+from cenyslovensko_client import (
     CenyslovenskoProductRpcClient,
     CenyslovenskoVersionRpcClient,
     RPC_SERVER_BIN_ENV,
     RpcClientError,
     RpcProtocolError,
 )
-from cenyslovensko_bindings.adapters.command_resolver import resolve_rpc_server_command
+from cenyslovensko_client.adapters.command_resolver import resolve_rpc_server_command
 
 
 FAKE_SERVER = r"""
