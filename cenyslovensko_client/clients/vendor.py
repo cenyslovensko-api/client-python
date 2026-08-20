@@ -6,10 +6,10 @@ from typing import Any, Mapping, Sequence
 from ..errors import RpcClientError
 from ..ports import RpcTransport
 from ..rpc_session import RpcSession
-from ..types import ProductResponse
+from ..types import Vendor, VendorsResponse
 
 
-class CenyslovenskoProductRpcClient:
+class CenyslovenskoVendorRpcClient:
     def __init__(
         self,
         command: Sequence[str] | None = None,
@@ -27,7 +27,7 @@ class CenyslovenskoProductRpcClient:
             transport=transport,
         )
 
-    def __enter__(self) -> "CenyslovenskoProductRpcClient":
+    def __enter__(self) -> "CenyslovenskoVendorRpcClient":
         self.start()
         return self
 
@@ -43,8 +43,9 @@ class CenyslovenskoProductRpcClient:
     def call(self, method: str, params: Any = None) -> Any:
         return self._session.call(method=method, params=params)
 
-    def get_product(self, product_id: str) -> ProductResponse:
-        response: ProductResponse = self.call("product.get", {"id": product_id})
-        if not isinstance(response, dict):
-            raise RpcClientError("Missing or invalid product payload in response")
-        return response
+    def get_vendors(self) -> list[Vendor]:
+        response: VendorsResponse = self.call("vendor.get")
+        vendors = response.get("vendors")
+        if not isinstance(vendors, list):
+            raise RpcClientError("Missing or invalid 'vendors' in response")
+        return vendors

@@ -6,6 +6,7 @@ from typing import Any, Mapping, Sequence
 from ..errors import RpcClientError
 from ..ports import RpcTransport
 from ..rpc_session import RpcSession
+from ..types import VersionResponse
 
 
 class CenyslovenskoVersionRpcClient:
@@ -43,7 +44,7 @@ class CenyslovenskoVersionRpcClient:
         return self._session.call(method=method, params=params)
 
     def get_version(self) -> str:
-        response = self.call("version.get")
+        response: VersionResponse = self.call("version.get")
         version = response.get("version")
         if not isinstance(version, str):
             raise RpcClientError("Missing or invalid 'version' in response")

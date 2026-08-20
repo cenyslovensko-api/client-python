@@ -1,1 +1,2 @@
 recursive-include cenyslovensko_client/vendor *
+include cenyslovensko_client/py.typed

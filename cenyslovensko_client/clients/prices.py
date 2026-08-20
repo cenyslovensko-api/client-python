@@ -6,10 +6,10 @@ from typing import Any, Mapping, Sequence
 from ..errors import RpcClientError
 from ..ports import RpcTransport
 from ..rpc_session import RpcSession
-from ..types import ProductResponse
+from ..types import ProductPricesCurrentDayResponse
 
 
-class CenyslovenskoProductRpcClient:
+class CenyslovenskoProductPricesRpcClient:
     def __init__(
         self,
         command: Sequence[str] | None = None,
@@ -27,7 +27,7 @@ class CenyslovenskoProductRpcClient:
             transport=transport,
         )
 
-    def __enter__(self) -> "CenyslovenskoProductRpcClient":
+    def __enter__(self) -> "CenyslovenskoProductPricesRpcClient":
         self.start()
         return self
 
@@ -43,8 +43,28 @@ class CenyslovenskoProductRpcClient:
     def call(self, method: str, params: Any = None) -> Any:
         return self._session.call(method=method, params=params)
 
-    def get_product(self, product_id: str) -> ProductResponse:
-        response: ProductResponse = self.call("product.get", {"id": product_id})
+    def get_current_day_prices(
+        self,
+        branch_ids: Sequence[str] | None = None,
+        order_by: str = "unit_price",
+        sort_order: str = "asc",
+        only_in_my_branches: bool = True,
+        category_id: int | None = None,
+        group_by_vendor: bool = False,
+        page: int = 0,
+        size: int = 25,
+    ) -> ProductPricesCurrentDayResponse:
+        params: dict[str, Any] = {
+            "branchIds": list(branch_ids or []),
+            "orderBy": order_by,
+            "sortOrder": sort_order,
+            "onlyInMyBranches": only_in_my_branches,
+            "categoryId": category_id,
+            "groupByVendor": group_by_vendor,
+            "page": page,
+            "size": size,
+        }
+        response: ProductPricesCurrentDayResponse = self.call("product-prices.current-day.get", params)
         if not isinstance(response, dict):
-            raise RpcClientError("Missing or invalid product payload in response")
+            raise RpcClientError("Missing or invalid product prices payload in response")
         return response
